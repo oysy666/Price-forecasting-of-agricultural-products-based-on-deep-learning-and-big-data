@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>基于大数据与深度学习的农产品价格预测分析系统</title>
+    <script src="../static/js/jquery-2.2.1.min.js"></script>
+    <script src="../static/js/rem.js"></script>
+{#    <script src="../static/js/echarts.min.js"></script>#}
+{#    <script src="../static/js/guangxi.js"></script>#}
+    <script src="../static/js/index.js"></script>
+    <link rel="stylesheet" href="../static/css/index.css">
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/maps/zhejiang.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts-wordcloud.min.js"></script>
+
+</head>
+<body>
+    <div class="t_container">
+        <header class="t_header">
+            <span>基于大数据与深度学习的农产品价格预测分析系统</span>
+        </header>
+        <main class="t_main">
+            <div class="t_left_box">
+                <img class="t_l_line" src="../static/img/left_line.png" alt="">
+{#                <div id="chart_31" ></div>#}
+                <div class="t_mbox t_gbox">
+                     <div id="chart_31" class="t_mbox t_gbox" style="width: 100%; height: 4.2rem;" ></div>
+                </div>
+                <img class="t_r_line" src="../static/img/right_line.png" alt="">
+            </div>
+            <div class="t_center_box">
+                <div class="t_top_box">
+                    <img class="t_l_line" src="../static/img/left_line.png" alt="">
+                        <h1 style=" height:30px;color: beige;text-align:center;font-size: 30px;">当前城市：{{c_name}}</h1>
+                    <form  name="form" method='POST' action="/" style=" height:80px;color: beige;text-align:center;font-size: 30px;" >
+                    <ul class="t_nav">
+                        <li>
+                            <span>城市</span>
+                            <h1>
+{#                                <input type="text" name="urban" style="height:30px;width:160px;font-size:30px; background-color: #1AA1FD" value="绍兴市" placeholder="杭州市">#}
+                                <select style="height:30px;width:160px;font-size:26px; background-color: #1AA1FD" onchange="this.parentNode.nextSibling.value=this.value" name="urban">
+                                    <option value="湖州市">湖州市</option>
+                                    <option value="嘉兴市">嘉兴市</option>
+                                    <option value="杭州市">杭州市</option>
+                                    <option value="绍兴市">绍兴市</option>
+                                    <option value="舟山市">舟山市</option>
+                                    <option value="宁波市">宁波市</option>
+                                    <option value="衢州市">衢州市</option>
+                                    <option value="金华市">金华市</option>
+                                    <option value="丽水市">丽水市</option>
+                                    <option value="台州市">台州市</option>
+                                    <option value="温州市">温州市</option>
+                                </select>
+                            </h1>
+                            <i></i>
+                        </li>
+                        <li>
+                            <span>商品</span>
+                            <h1>
+{#                                <input type="text" name="goods" style="height:30px;width:160px;font-size:30px; background-color: #1AA1FD" value="商品1" placeholder="商品1">#}
+                                <select style="height:30px;width:160px;font-size:26px; background-color: #1AA1FD" onchange="this.parentNode.nextSibling.value=this.value" name="goods">
+                                    <option value="黄瓜">黄瓜</option>
+                                    <option value="西红柿">西红柿</option>
+                                    <option value="白菜">白菜</option>
+                                    <option value="青椒">青椒</option>
+                                    <option value="土豆">土豆</option>
+                                    <option value="南瓜">南瓜</option>
+                                    <option value="茄子">茄子</option>
+                                    <option value="生菜">生菜</option>
+                                    <option value="娃娃菜">娃娃菜</option>
+                                    <option value="菠菜">菠菜</option>
+                                    <option value="韭菜">韭菜</option>
+                                    <option value="胡萝卜">胡萝卜</option>
+                                    <option value="西兰花">西兰花</option>
+                                    <option value="油麦菜">油麦菜</option>
+                                    <option value="蒜黄">蒜黄</option>
+                                    <option value="上海青">上海青</option>
+                                    <option value="香菜">香菜</option>
+                                    <option value="豆角">豆角</option>
+                                    <option value="小葱">小葱</option>
+                                    <option value="茼蒿">茼蒿</option>
+                                    <option value="香菇">香菇</option>
+                                    <option value="木耳">木耳</option>
+                                    <option value="蒜苔">蒜苔</option>
+                                    <option value="芹菜">芹菜</option>
+                                    <option value="红薯">红薯</option>
+                                    <option value="大蒜">大蒜</option>
+                                    <option value="生姜">生姜</option>
+                                </select>
+                            </h1>
+                            <i></i>
+                        </li>
+                        <li>
+                            <span>提交</span>
+                            <h1>
+                                <input type="submit"  style="height:30px;width:160px;font-size:20px; color: #F0FF00; background-color: #1AA1FD" value="点击查询">
+
+                            </h1>
+                        </li>
+                    </ul>
+                    </form>
+                    <img class="t_r_line" src="../static/img/right_line.png" alt="">
+                </div>
+
+                <div class="t_bottom_box">
+                    <img class="t_l_line" src="../static/img/left_line.png" alt="">
+
+                    <div style="width: 100%; height: 3.6rem;">
+                    <div class="center_bot">
+					<div class="tbl-header">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>商品主键</th>
+										<th>商品价格</th>
+										<th>采价日期</th>
+										<th>商品销量</th>
+										<th>销售额</th>
+									</tr>
+								</thead>
+							</table>
+					</div>
+				    </div>
+					<div class="tablebox">
+						<div class="tbl-body">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<thead>
+                                <tr>
+										<th>序号</th>
+										<th>商品主键</th>
+										<th>商品价格</th>
+										<th>采价日期</th>
+										<th>商品销量</th>
+										<th>销售额</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+                    </div>
+
+                    <img class="t_r_line" src="../static/img/right_line.png" alt="">
+                </div>
+            </div>
+            <div class="t_right_box">
+                    <img class="t_l_line" src="../static/img/left_line.png" alt="">
+                    <div id="chart_4" class="echart" style="width: 50%; height: 4.6rem; position: absolute;"></div>
+
+
+                    <header class="t_b_h">
+                        <div id="chart_5" class="echart" style="width: 80%; height: 4.6rem;"></div>
+                    </header>
+                    <img class="t_r_line" src="../static/img/right_line.png" alt="">
+            </div>
+            <div class="b_left_box">
+                    <img class="t_l_line" src="../static/img/left_line.png" alt="">
+                    <div id="chart_2" class="echart" style="width: 100%; height: 4rem;"></div>
+                    <img class="t_r_line" src="../static/img/right_line.png" alt="">
+            </div>
+            <div class="b_center_box">
+                    <img class="t_l_line" src="../static/img/left_line.png" alt="">
+                    <div id="chart_1" class="echart" style="width: 100%; height: 4rem;"></div>
+                    <img class="t_r_line" src="../static/img/right_line.png" alt="">
+            </div>
+            <div class="b_right_box">
+                    <img class="t_l_line" src="../static/img/left_line.png" alt="">
+                    <div id="chart_line" class="echart" style="width: 100%; height: 4rem;"></div>
+                    <img class="t_r_line" src="../static/img/right_line.png" alt="">
+            </div>
+        </main>
+    </div>
+
+<script>
+    	var MyMarhq = '';
+    clearInterval(MyMarhq);
+    $('.tbl-body tbody').empty();
+    $('.tbl-header tbody').empty();
+    var str = '';
+    var Items = {{ ls | tojson }}
+    $.each(Items,function (i, item) {
+        str = '<tr>' +
+                '<td>' + item.Ranking + '</td>' +
+                '<td>' + item.商品主键 + '</td>' +
+                '<td>' + (+item.商品价格).toFixed(2) + '</td>' +
+                '<td>' + item.商品采价日期 + '</td>' +
+                '<td>' + (item.商品销量).toFixed(2) + '</td>' +
+                '<td>' + (+item.销售额).toFixed(2) + '</td>' +
+                '</tr>'
+
+        $('.tbl-body tbody').append(str);
+        $('.tbl-header tbody').append(str);
+    });
+
+    if(Items.length > 10){
+        $('.tbl-body tbody').html($('.tbl-body tbody').html()+$('.tbl-body tbody').html());
+        $('.tbl-body').css('top', '0');
+        var tblTop = 0;
+        var speedhq = 50; // 数值越大越慢
+        var outerHeight = $('.tbl-body tbody').find("tr").outerHeight();
+        function Marqueehq(){
+            if(tblTop <= -outerHeight*Items.length){
+                tblTop = 0;
+            } else {
+                tblTop -= 1;
+            }
+            $('.tbl-body').css('top', tblTop+'px');
+        }
+
+        MyMarhq = setInterval(Marqueehq,speedhq);
+
+        // 鼠标移上去取消事件
+        $(".tbl-header tbody").hover(function (){
+            clearInterval(MyMarhq);
+        },function (){
+            clearInterval(MyMarhq);
+            MyMarhq = setInterval(Marqueehq,speedhq);
+        })
+
+    }
+
+</script>
+</body>
+</html>
